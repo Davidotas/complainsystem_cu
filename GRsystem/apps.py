@@ -3,7 +3,7 @@ from suit.apps import DjangoSuitConfig
 
 class SuitConfig(DjangoSuitConfig):
     layout='vertical'
-    name = 'web'
+    name = 'GRsystem'
 class GrsystemConfig(AppConfig):
     name = 'GRsystem'
     
