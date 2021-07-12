@@ -40,8 +40,8 @@ def counter(request):
         total=Complaint.objects.all().count()
         unsolved=Complaint.objects.all().exclude(status='1').count()
         solved=Complaint.objects.all().exclude(Q(status='3') | Q(status='2')).count()
-        dataset=Complaint.objects.values('Type_of_complaint').annotate(total=Count('status'),solved=Count('status', filter=Q(status='1')),
-                  notsolved=Count('status', filter=Q(status='3')),inprogress=Count('status',filter=Q(status='2'))).order_by('Type_of_complaint')
+        dataset=Complaint.objects.values('Department').annotate(total=Count('status'),solved=Count('status', filter=Q(status='1')),
+                  notsolved=Count('status', filter=Q(status='3')),inprogress=Count('status',filter=Q(status='2'))).order_by('Department')
         args={'total':total,'unsolved':unsolved,'solved':solved,'dataset':dataset,}
         return render(request,"GRsystem/counter.html",args)
 
@@ -185,9 +185,9 @@ def allcomplaints(request):
         drop=request.GET.get("drop")
 
         if drop:
-                c=c.filter(Q(Type_of_complaint__icontains=drop))
+                c=c.filter(Q(Department__icontains=drop))
         if comp:
-                c=c.filter(Q(Type_of_complaint__icontains=comp)|Q(Description__icontains=comp)|Q(Subject__icontains=comp))
+                c=c.filter(Q(Department__icontains=comp)|Q(Description__icontains=comp)|Q(Subject__icontains=comp))
         if request.method=='POST':
                 cid=request.POST.get('cid2')
                 uid=request.POST.get('uid')
@@ -228,10 +228,10 @@ def solved(request):
         drop=request.GET.get("drop")
 
         if drop:
-                c=c.filter(Q(Type_of_complaint__icontains=drop))
+                c=c.filter(Q(Department__icontains=drop))
         if comp:
                
-                c=c.filter(Q(Type_of_complaint__icontains=comp)|Q(Description__icontains=comp)|Q(Subject__icontains=comp))
+                c=c.filter(Q(TDepartment__icontains=comp)|Q(Description__icontains=comp)|Q(Subject__icontains=comp))
         if request.method=='POST':
                 cid=request.POST.get('cid2')
                 print(cid)
@@ -270,7 +270,7 @@ def pdf_viewer(request):
     name = Complaint.objects.filter(id=cid).values('user_id')
     '''Branch = Complaint.objects.filter(id=cid).values('Branch')'''
     Subject = Complaint.objects.filter(id=cid).values('Subject')
-    Type = Complaint.objects.filter(id=cid).values('Type_of_complaint')
+    Departments = Complaint.objects.filter(id=cid).values('Department')
     Issuedate = Complaint.objects.filter(id=cid).values('Time')
     #date_format1 = "%Y-%m-%d %H:%M:%S.%f%z"
    
@@ -283,8 +283,8 @@ def pdf_viewer(request):
             detailbranch=("Branch: {}".format(val['Branch']))'''
     for val in Subject:
             detailsubject=("Subject: {}".format(val['Subject']))
-    for val in Type:
-            detailtype=("{}".format(val['Type_of_complaint']))
+    for val in Departments:
+            detailtype=("{}".format(val['Department']))
             
     for val in Issuedate:
             ptime=("{}".format(val['Time']))
@@ -298,15 +298,15 @@ def pdf_viewer(request):
     print(a)
     print (delta.days )       
     if detailtype=='1':
-            detailtype="Type of Complaint: ClassRoom"
+            detailtype="Department: CSIS"
     if detailtype=='3':
-            detailtype="Type of Complaint: Management"
+            detailtype="Department: CST"
     if detailtype=='2':
-            detailtype="Type of Complaint: Teacher"
+            detailtype="Department: Student Affairs"
     if detailtype=='4':
-            detailtype="Type of Complaint: School"
+            detailtype="Department: School"
     if detailtype=='5':
-            detailtype="Type of Complaint: Other"
+            detailtype="Department: Finance"
 
     p.drawString(25, 770,"Report:")
     p.drawString(30, 750,detailname)
@@ -335,7 +335,7 @@ def pdf_view(request):
     name = User.objects.filter(username=request.user.username).values('username')
     #Branch = Complaint.objects.filter(id=cid).values('Branch')
     Subject = Complaint.objects.filter(id=cid).values('Subject')
-    Type = Complaint.objects.filter(id=cid).values('Type_of_complaint')
+    Departments = Complaint.objects.filter(id=cid).values('Department')
     Issuedate = Complaint.objects.filter(id=cid).values('Time')
 
     for val in details:
@@ -346,24 +346,23 @@ def pdf_view(request):
             #detailbranch=("Branch: {}".format(val['Branch']))
     for val in Subject:
             detailsubject=("Subject: {}".format(val['Subject']))
-    for val in Type:
-            detailtype=("{}".format(val['Type_of_complaint']))
+    for val in Departments:
+            detailtype=("{}".format(val['Department']))
             
     for val in Issuedate:
             detailtime=("Time of Issue: {}".format(val['Time']))
     #detail_string = u", ".join(("Desc={}".format(val['Description'])) for val in details) 
 
     if detailtype=='1':
-            detailtype="Type of Complaint: ClassRoom"
+            detailtype="Department: CSIS"
     if detailtype=='3':
-            detailtype="Type of Complaint: Management"
+            detailtype="Department: CST"
     if detailtype=='2':
-            detailtype="Type of Complaint: Teacher"
+            detailtype="Department: Student Affairs"
     if detailtype=='4':
-            detailtype="Type of Complaint: School"
+            detailtype="Department: School"
     if detailtype=='5':
-            detailtype="Type of Complaint: Other"
-
+            detailtype="Department: Finance"
     p.drawString(25, 770,"Report:")
     p.drawString(30, 750,detailname)
     #p.drawString(30, 730,detailbranch)
