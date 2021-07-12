@@ -149,7 +149,7 @@ background: linear-gradient(to right, #4A00E0, #4A00E0); /* W3C, IE 10+/ Edge, F
         
         xAxis: {
           categories: [
-            {% for entry in dataset %}'{{ entry.Department }}'{% if not forloop.last %}, {% endif %}{% endfor %}
+            {% for entry in dataset %}{{ entry.Department }}{% if not forloop.last %}, {% endif %}{% endfor %}
           ]
         },
           yAxis: {
