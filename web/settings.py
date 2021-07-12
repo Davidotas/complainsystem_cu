@@ -46,7 +46,9 @@ INSTALLED_APPS = [
     'allauth.account', # new
     'allauth.socialaccount',
     'reportlab', 
-    'django_extensions',  
+    'django_extensions', 
+    'suit' 
+    'django-suit'
 ]
 
 MIDDLEWARE = [
@@ -57,7 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 
 ]
 
