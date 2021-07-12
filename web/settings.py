@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'reportlab', 
     'django_extensions', 
     'suit' 
-    'django_suit'
+
 ]
 
 MIDDLEWARE = [
