@@ -47,9 +47,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'reportlab', 
     'django_extensions', 
-    'suit.apps'
     'suit' 
-    'django-suit'
+    'django_suit'
 ]
 
 MIDDLEWARE = [
