@@ -21,7 +21,7 @@ lazy-object-proxy
 mccabe
 mysqlclient
 oauthlib
-
+django_heroku
 Pillow
 pylint
 pylint-mongoengine
