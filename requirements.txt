@@ -12,7 +12,7 @@ django-crispy-forms==1.7.2
 django-excel-response2==2.0.8
 django-model-utils
 django-phonenumber-field
-django-suit== 0.2.1
+django-suit
 django-extensions
 djangorestframework==3.9.1
 idna==2.8
