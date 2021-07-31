@@ -8,14 +8,14 @@
 
 </style>
 
-<body style="background: #8E2DE2;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #4A00E0, #8E2DE2);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #4A00E0, #4A00E0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+<body style="background: #f4eef8;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #8976af, #e7e4eb);  /* Chrome 10-25, Safari 5.1-6 */
+background-image: urllinear-gradient(to right, #6040a0, #e638b1); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 "
 >
 <div  class="jumbotron text-center">
-        <h1 style="color:blue">Welcome to Covenant University Login Section</h1>
-        <p style="color:blue">Choose the Prefered Login Below.</p> 
+        <h1 style="color:rgb(255, 0, 191)">Welcome to Covenant University CMS Login Section</h1>
+        <p style="color:rgb(39, 162, 173)">Choose the Prefered Login Below.</p> 
       </div>
 
           {% load static %}
@@ -26,10 +26,10 @@ background: linear-gradient(to right, #4A00E0, #4A00E0); /* W3C, IE 10+/ Edge, F
          <div class="card mx-auto ">
           <div class="col">
               <br>
-            <img src="{% static 'GRsystem/img/student.png' %}" class="img-rounded" alt="Cinque Terre">
+            <img src="{% static 'GRsystem/img/student1.png' %}" class="img-rounded" alt="Cinque Terre">
             
             <p></p>
-            <a href="/signin/"><button type="button" class="btn  btn-outline-primary">Student/Staff Login</button></a>
+            <a href="/signin/"><button type="button" class="btn  btn-outline-primary">Student/Staff/Guest Login</button></a>
            </div>
            </div>
           </div>
@@ -38,7 +38,7 @@ background: linear-gradient(to right, #4A00E0, #4A00E0); /* W3C, IE 10+/ Edge, F
           <div class="col">
 
                 <br>
-            <img src="{% static 'GRsystem/img/admin.png' %}" class="img-rounded" alt="Cinque Terre">
+            <img src="{% static 'GRsystem/img/admin1.png' %}" class="img-rounded" alt="Cinque Terre">
             <p></p>
            <a href="/admin/" class="btn  btn-outline-primary">Admin Login</a>
           </div>

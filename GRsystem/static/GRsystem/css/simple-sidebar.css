@@ -32,7 +32,9 @@ body {
 #wrapper.toggled #sidebar-wrapper {
   margin-left: 0;
 }
-
+.navigation {
+  padding: 1000px !important;
+}
 @media (min-width: 768px) {
   #sidebar-wrapper {
     margin-left: 0;

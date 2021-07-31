@@ -76,7 +76,7 @@ class ProfileUpdateForm(forms.ModelForm):
 
 class UserProfileUpdateform(forms.ModelForm):
     
-    collegename =forms.CharField(widget = forms.TextInput(attrs={'readonly':'readonly'}))
+    college =forms.CharField(widget = forms.TextInput(attrs={'readonly':'readonly'}))
     Course=forms.CharField(widget = forms.TextInput(attrs={'readonly':'readonly'}))
 
     class Meta:

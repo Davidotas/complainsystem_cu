@@ -3,6 +3,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from six import python_2_unicode_compatible
 
 from django.core.validators import RegexValidator
 from datetime import datetime
@@ -11,15 +12,24 @@ class Meta:
 
     app_label = 'HelpDesk'
 class Profile(models.Model):
-    typeuser =(('student','student'),('admin', 'admin'))
+    typeuser =(('student','student'),('staff', 'staff'),('admin', 'admin'))
+    Departments=(('CSIS',"CSIS"),('Academic',"Academic"),('Student Affairs',"Student Affairs"),('Finance',"Finance"),('Other',"Other"))
     COL=(('CoE','COE'),('CDS','CDS'),('CST','CST')) #change college names
+
+    Department=models.CharField(choices=Departments,null=True,max_length=200)
     user =models.OneToOneField(User, on_delete=models.CASCADE,primary_key=True)
-    college=models.CharField(max_length=29,choices=COL,blank=False)
+
+    college=models.CharField(max_length=29,choices=COL,blank=True)
+
     type_user=models.CharField(max_length=20,default='student',choices=typeuser)
-    CB=(('COM',"COM"),('ICE',"ICE"),('EIE',"EIE"),('Mechanical',"Mechanical"))
+
+    CB=(('STAFF',"STAFF"),('STUDENT',"STUDENT"),('GUEST',"GUEST"),('OTHER',"OTHER"))
+
     Course=models.CharField(choices=CB,max_length=29,default='COM')
+
     def __str__(self):
-        return self.collegename
+        return self.college
+
     def __str__(self):
         return self.user.username
     
@@ -37,7 +47,7 @@ def save_user_profile(sender, instance, **kwargs):
 
 class Complaint(models.Model):
     STATUS =((1,'Solved'),(2, 'InProgress'),(3,'Pending'))
-    Departments=(('CSIS',"CSIS"),('CST',"CST"),('Student Affairs',"Student Affairs"),('Finance',"Finance"),('Other',"Other"))
+    Departments=(('CSIS',"CSIS"),('Academic',"Academic"),('Student Affairs',"Student Affairs"),('Finance',"Finance"),('Other',"Other"))
     
     Subject=models.CharField(max_length=200,blank=False,null=True)
     user=models.ForeignKey(User, on_delete=models.CASCADE,default=None)

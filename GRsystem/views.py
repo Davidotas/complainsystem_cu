@@ -150,7 +150,7 @@ def complaints(request):
                instance.user=request.user
                mail=request.user.email
                print(mail)
-               send_mail('Hi \n Complaint has been Received', 'Thank you for letting us know of your concern, Have a Cookie while we explore into this matter. \n Dont Reply to this mail', 'testerpython13@gmail.com', [mail],fail_silently=False)
+               
                instance.save()
                
                messages.add_message(request,messages.SUCCESS, f'Complaint Registered!!!')
@@ -164,13 +164,31 @@ def complaints(request):
 
 @login_required
 def list(request):
-    c=Complaint.objects.filter(user=request.user).exclude(status='1')
-    result=Complaint.objects.filter(user=request.user).exclude(Q(status='3') | Q(status='2'))
-    #c=Complaint.objects.all()
+    print(request.user)
+
+    complaint=Complaint.objects.all()
+    for items in complaint:
+        complaint_user=items.Department
+        # print(complaint_user)
+
+
+        if str(request.user).lower()==str(complaint_user).lower():
+                # print(request.user)
+                c=Complaint.objects.filter(Department=str(complaint_user).upper()).exclude(status='1')
+                
+                result=Complaint.objects.filter(Department=str(complaint_user).upper()).exclude(Q(status='3') | Q(status='2'))
+                print(result)
+
+        else:
+                c=Complaint.objects.filter(user=request.user).exclude(status='1')
+                result=Complaint.objects.filter(user=request.user).exclude(Q(status='3') | Q(status='2'))
+                #c=Complaint.objects.all()
     args={'c':c,'result':result}
     return render(request,'Grsystem/Complaints.html',args)
 @login_required
 def slist(request):
+    print(request.user)
+    
     result=Complaint.objects.filter(user=request.user).exclude(Q(status='3') | Q(status='2'))
     #c=Complaint.objects.all()
     args={'result':result}
@@ -204,7 +222,7 @@ def allcomplaints(request):
                        
                       
                         print(m)
-                        send_mail('Hi, \n Complaint has been Resolved ', 'Thanks for letting us know of your concern, \n Hope we have solved your issue. \n Dont Reply to this mail', 'testerpython13@gmail.com', [m],fail_silently=False)
+                        
                         obj.save()
                         messages.add_message(request,messages.SUCCESS, f'Complaint Updated!!!')
                         return HttpResponseRedirect(reverse('allcomplaints'))

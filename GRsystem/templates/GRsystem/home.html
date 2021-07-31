@@ -1,5 +1,8 @@
 {% extends "GRsystem/index.html" %}
 
+{% load static %}
+
+
 
 <head>
     <meta charset="utf-8">
@@ -7,14 +10,18 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 {% block content %}
 <style>
 body
 {
+    background-image: url("/static/GRsystem/img/help.png") !important;
+    background-repeat: no-repeat;
+background-size: cover;
+background-position: center center;
 
-    background-color: #007bff !important;
     
 }
 img{
@@ -23,21 +30,17 @@ img{
 }
 .card
 {
-  border:#007bff !important;
+  background-image: url("/static/GRsystem/img/help.png") !important 
+}
+.navigation {
+  /* padding: 1000px; */
 }
 </style>
-          {% load static %}
+          
   
-
-<div class="card bg-warning text-white">
-    
-                <div class="ml-3">
-                <p style="color:white; font-size:40px;"> <b>Covenant University HelpDesk</b></p>
-        <p style="color:white; text-align:justify;">
-
-                 
-           
-                </p>
+<div class="row  d-flex justify-content-center"></div>
+<div class="navigation">
+    <h1 style="text-align: center;">Covenant University CMS</h1>
   </div>
 <br>
 
@@ -52,25 +55,24 @@ img{
 <div class="row  d-flex justify-content-center">
 <div class="col-sm-3 col-sm-pull-4">
 <div class="card bg-primary text-white" style="width: 18rem;">
-  <img src="{% static 'GRsystem/img/form.png' %}" class="img-rounded" alt="Cinque Terre">
-  <div class="card-body">
-    <p class="card-text">Get the Complaints.</p>
-  </div>
+  <img src="{% static 'GRsystem/img/form1.jpg' %}" class="img-rounded" alt="Cinque Terre">  
+    <p style="color:black;" >Get the Complaints.</p>
+
 </div>
 </div>
 <div class="col-sm-3 col-sm-pull-4">
 <div class="card bg-primary text-white" style="width: 18rem;">
-  <img src="{% static 'GRsystem/img/solved.png' %}" class="img-rounded" alt="Cinque Terre">
+  <img src="{% static 'GRsystem/img/solved1.png' %}" class="img-rounded" alt="Cinque Terre">
   <div class="card-body">
-    <p class="card-text">Solve the Complaints.</p>
+    <p style="color:black;"class="card-text">Solve the Complaints.</p>
   </div>
 </div>
 </div>
 <div class="col-sm-3">
 <div class="card bg-primary text-white" style="width: 18rem;">
-   <img src="{% static 'GRsystem/img/bars.png' %}" class="img-rounded" alt="Cinque Terre">
+   <img src="{% static 'GRsystem/img/bars1.jpg' %}" class="img-rounded" alt="Cinque Terre">
   <div class="card-body">
-    <p class="card-text">Get the Stats of the Complaints.</p>
+    <p style="color:black;" class="card-text">Get the Stats of the Complaints.</p>
   </div>
 </div>
 </div>
